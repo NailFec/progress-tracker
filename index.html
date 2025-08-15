@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Progress Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        
+        <div class="content">
+            <!-- Add Task Button -->
+            <div class="fixed-buttons-container">
+                <button class="add-task-btn" onclick="openAddTaskModal()" title="Add New Task"><i class="fas fa-plus"></i></button>
+
+                <!-- Data Management Section -->
+                <div class="data-management">
+                    <div class="data-buttons">
+                        <button class="btn btn-secondary" onclick="exportData()" title="Export Data"><i class="fas fa-file-export"></i></button>
+                        <button class="btn btn-secondary" onclick="importData()" title="Import Data"><i class="fas fa-file-import"></i></button>
+                        <button class="btn btn-danger" onclick="clearAllData()" title="Clear All Data"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                    <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleFileImport(event)">
+                </div>
+            </div>
+
+            <!-- Tasks Container -->
+            <div class="tasks-container" id="tasksContainer">
+                <!-- Tasks will be dynamically added here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState">
+                <h3>No tasks yet</h3>
+                <p>Add your first task to get started!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div id="addTaskModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Task</h3>
+                <span class="close" onclick="closeAddTaskModal()">&times;</span>
+            </div>
+            <div class="form-group">
+                <label for="taskName">Task Name</label>
+                <input type="text" id="taskName" placeholder="Enter task name" required>
+            </div>
+            <div class="form-group">
+                <label for="taskTarget">Target Value</label>
+                <input type="number" id="taskTarget" placeholder="Enter target value" min="1" required>
+            </div>
+            <div style="text-align: right;">
+                <button class="modal-btn" onclick="addTask()" title="Add Task">Add Task</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Task Modal -->
+    <div id="editTaskModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Task</h2>
+                <span class="close" onclick="closeEditTaskModal()">&times;</span>
+            </div>
+            <div class="form-group">
+                <label for="editTaskName">Task Name</label>
+                <input type="text" id="editTaskName" placeholder="Enter new task name">
+            </div>
+            <div class="form-group">
+                <label for="editTaskCurrent">Current Progress</label>
+                <input type="number" id="editTaskCurrent" placeholder="Enter current progress">
+            </div>
+            <div class="form-group">
+                <label for="editTaskTarget">Total Progress</label>
+                <input type="number" id="editTaskTarget" placeholder="Enter new target">
+            </div>
+            <button class="modal-btn" onclick="updateTask()">Save Changes</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
